@@ -2,11 +2,7 @@
 
 API para o Startup One.
 
-`run-tests.sh` runs a simplistic test and generates the API
-documentation below.
-
-It uses `run-curl-tests.rb` which runs each command defined in
-`commands.yml`.
+Execute o `initialize.sh` para uma execução simples do projeto.
 
 ## Executando o projeto
 
