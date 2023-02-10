@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  api_service:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql_db
+    command: sh -c './wait-for mysql_db:3306 -- npm start'
+  mysql_db:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: my_pets
+      MYSQL_USER: mypets
+      MYSQL_PASSWORD: nUWhgcPUz8uxBp2n9LKu
+      MYSQL_ROOT_PASSWORD: nUWhgcPUz8uxBp2n9LKu
