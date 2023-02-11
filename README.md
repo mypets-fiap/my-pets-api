@@ -11,10 +11,10 @@ Execute o `initialize.sh` para uma execução simples do projeto.
     ./initialize.sh
 Obs: Caso não seja possível executá-lo, favor torná-lo um arquivo executável através do comando ```chmod +x initialize.sh``` 
 
-### Via docker
+### Via docker-compose
     $ ./gradlew bootJar
-    $ docker build -t my-pets-api .
-    $ docker run -p 8080:8080 my-pets-api
+    $ docker-compose build
+    $ docker-compose up
 ## Validando a subida
 
 http://localhost:8080/health
