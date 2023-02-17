@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "tb_pet")
-public class PetEntity {
+public class PetEntity implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -14,6 +16,10 @@ public class PetEntity {
 
     private String nome;
     private String raca;
+
+    @ManyToOne
+    @JoinColumn(name="owner_id", referencedColumnName="id", nullable=false)
+    private OwnerEntity owner;
 
     public PetEntity() {
     }
@@ -40,6 +46,14 @@ public class PetEntity {
 
     public void setRaca(String raca) {
         this.raca = raca;
+    }
+
+    public OwnerEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(OwnerEntity owner){
+        this.owner = owner;
     }
 
     @Override
