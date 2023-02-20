@@ -47,4 +47,14 @@ public class OwnerEntity implements Serializable {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+    @Override
+    public String toString() {
+        return "OwnerEntity{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", pets=" + pets +
+                '}';
+    }
 }
