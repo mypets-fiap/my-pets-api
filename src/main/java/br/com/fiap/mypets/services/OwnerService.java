@@ -17,8 +17,17 @@ public class OwnerService {
     @Autowired
     private OwnerRepository repository;
 
-    public OwnerEntity save(OwnerEntity owner){
+    public OwnerEntity save(OwnerEntity owner) throws Exception {
         owner.setId(UUID.randomUUID().toString());
+
+        if(owner.getNome().length() < 3){
+            throw new RuntimeException("Nome deve ter pelo menos 3 caracteres");
+        }
+
+        if(owner.getIdade() < 0 || owner.getIdade() > 120){
+            throw new RuntimeException("Idade inválida");
+        }
+
         LOG.info("Salvando owner: "+owner);
         return repository.save(owner);
 
