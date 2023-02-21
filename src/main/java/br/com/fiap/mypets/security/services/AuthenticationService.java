@@ -4,17 +4,22 @@ import br.com.fiap.mypets.security.controllers.model.AuthenticationRequest;
 import br.com.fiap.mypets.security.controllers.model.AuthenticationResponse;
 import br.com.fiap.mypets.security.controllers.model.RegisterRequest;
 import br.com.fiap.mypets.security.model.Token;
+import br.com.fiap.mypets.security.model.User;
 import br.com.fiap.mypets.security.repository.TokenRepository;
 import br.com.fiap.mypets.security.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import br.com.fiap.mypets.security.model.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
+
+    Logger log = LoggerFactory.getLogger(AuthenticationService.class);
+
     @Autowired
     private UserRepository repository;
     @Autowired
@@ -31,6 +36,7 @@ public class AuthenticationService {
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(savedUser, jwtToken);
+        log.info("Credencial cadastrada com sucesso!");
         return new AuthenticationResponse(jwtToken);
     }
 
@@ -46,6 +52,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
+        log.info("Usuário autenticado com sucesso!");
         return new AuthenticationResponse(jwtToken);
     }
 

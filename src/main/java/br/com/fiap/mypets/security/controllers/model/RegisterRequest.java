@@ -1,5 +1,8 @@
 package br.com.fiap.mypets.security.controllers.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class RegisterRequest {
 
     private String firstName;
@@ -37,5 +40,14 @@ public class RegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+                .append("firstName", firstName)
+                .append("lastName", lastName)
+                .append("email", email)
+                .toString();
     }
 }
