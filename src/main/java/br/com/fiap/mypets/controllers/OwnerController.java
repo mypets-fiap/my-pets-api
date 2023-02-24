@@ -28,18 +28,11 @@ public class OwnerController {
 
     @PostMapping
     public ResponseEntity saveOwner(@RequestBody OwnerEntity owner) throws URISyntaxException {
-        try{
 
         LOG.info("Owner recebido: " + owner);
         owner = service.save(owner);
         return ResponseEntity.created(new URI("/Owner/"+ owner.getId()))
                              .body(new ResponseMyPetsEntity(owner));
-
-        } catch(RuntimeException ex){
-            return ResponseEntity.badRequest().body(new ResponseMyPetsEntity(ex.getMessage()));
-        } catch (Exception ex){
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
-        }
 
     }
 
