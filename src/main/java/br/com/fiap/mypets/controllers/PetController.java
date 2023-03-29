@@ -24,34 +24,57 @@ public class PetController {
     private PetService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity selectPet(@RequestHeader (name="Authorization") String token, @PathVariable String id){
-        DecodedJWT decodedJWT = JWT.decode(token.substring("Bearer ".length()));
-        
-        return ResponseEntity.ok(new PetEntity());
+    public ResponseEntity selectPet(@PathVariable String id){
+        try {
+            PetEntity pet = service.find(id);
+            return ResponseEntity.ok(pet);
+        }catch (Exception ex){
+            LOG.error("Erro inesperado ao consultar um pet", ex);
+            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+        }
+
     }
 
     @PostMapping
-    public ResponseEntity savePet(@RequestBody PetEntity pet){
+    public ResponseEntity savePet(@RequestHeader (name="Authorization") String token, @RequestBody PetEntity pet){
         try {
-            LOG.info("Pet recebido: "+pet);
-            pet = service.save(pet);
+            DecodedJWT decodedJWT = JWT.decode(token.substring("Bearer ".length()));
+            String email = decodedJWT.getClaim("sub").asString();
+            pet = service.save(email, pet);
             return ResponseEntity.created(new URI("/pet/"+ pet.getId()))
                                     .body(new ResponseMyPetsEntity(pet));
         }catch (Exception ex){
+            LOG.error("Erro inesperado ao cadastrar um pet", ex);
             return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity alterPet(@RequestBody @NotNull PetEntity pet, @PathVariable String id){
-        pet.setId(id);
-        pet = service.save(pet);
-        return ResponseEntity.ok(new ResponseMyPetsEntity(pet));
+    public ResponseEntity alterPet(@RequestHeader (name="Authorization") String token,
+                                   @RequestBody @NotNull PetEntity pet,
+                                   @PathVariable String id){
+
+        try {
+            DecodedJWT decodedJWT = JWT.decode(token.substring("Bearer ".length()));
+            String email = decodedJWT.getClaim("sub").asString();
+            pet.setId(id);
+            pet = service.save(email, pet);
+            return ResponseEntity.ok(new ResponseMyPetsEntity(pet));
+        }catch (Exception ex){
+            LOG.error("Erro inesperado ao alterar um pet", ex);
+            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+        }
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity removePet(@PathVariable String id){
-        service.delete(id);
-        return  ResponseEntity.ok(new ResponseMyPetsEntity("Pet excluído com sucesso."));
+        try {
+            service.delete(id);
+            return  ResponseEntity.ok(new ResponseMyPetsEntity("Pet excluído com sucesso."));
+        }catch (Exception ex){
+            LOG.error("Erro inesperado ao deletar um pet", ex);
+            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+        }
     }
 }

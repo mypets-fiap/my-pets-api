@@ -1,7 +1,9 @@
 package br.com.fiap.mypets.services;
 
 import br.com.fiap.mypets.model.entity.PetEntity;
+import br.com.fiap.mypets.model.entity.User;
 import br.com.fiap.mypets.repository.PetRepository;
+import br.com.fiap.mypets.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +13,26 @@ import java.util.UUID;
 
 @Service
 public class PetService {
-
     Logger LOG = LoggerFactory.getLogger(PetService.class);
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private PetRepository repository;
 
-    public PetEntity save(PetEntity pet){
+    public PetEntity save(String email, PetEntity pet){
+
+        User user = userRepository.findByEmail(email).orElseThrow();
+        pet.setUser(user);
 
         if(pet.getId() != null && !pet.getId().isEmpty()){
             LOG.info("Alterando pet: "+pet);
-            return repository.save(pet);
         }else{
             pet.setId(UUID.randomUUID().toString());
             LOG.info("Salvando pet: "+pet);
-            return repository.save(pet);
         }
-
+        return repository.save(pet);
     }
 
     public void delete(String id){
