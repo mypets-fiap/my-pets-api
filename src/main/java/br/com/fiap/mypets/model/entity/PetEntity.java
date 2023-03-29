@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.entity;
+package br.com.fiap.mypets.model.entity;
 
 import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -18,8 +18,8 @@ public class PetEntity implements Serializable {
     private String raca;
 
     @ManyToOne
-    @JoinColumn(name="owner_id", referencedColumnName="id", nullable=false)
-    private OwnerEntity owner;
+    @JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+    private User user;
 
     public PetEntity() {
     }
@@ -48,12 +48,12 @@ public class PetEntity implements Serializable {
         this.raca = raca;
     }
 
-    public OwnerEntity getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(OwnerEntity owner){
-        this.owner = owner;
+    public void setUser(User user){
+        this.user = user;
     }
 
     @Override

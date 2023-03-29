@@ -1,6 +1,6 @@
-package br.com.fiap.mypets.security.services;
+package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.security.repository.TokenRepository;
+import br.com.fiap.mypets.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

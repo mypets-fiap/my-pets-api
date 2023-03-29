@@ -1,5 +1,6 @@
-package br.com.fiap.mypets.security.model;
+package br.com.fiap.mypets.model.entity;
 
+import br.com.fiap.mypets.model.entity.PetEntity;
 import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -7,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_user")
@@ -24,6 +26,9 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PetEntity> pets;
 
     public User() {
     }

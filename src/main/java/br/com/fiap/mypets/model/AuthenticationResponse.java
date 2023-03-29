@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.security.controllers.model;
+package br.com.fiap.mypets.model;
 
 public class AuthenticationResponse {
 

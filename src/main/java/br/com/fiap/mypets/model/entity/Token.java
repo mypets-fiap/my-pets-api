@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.security.model;
+package br.com.fiap.mypets.model.entity;
 
 import jakarta.persistence.*;
 

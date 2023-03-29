@@ -1,9 +1,9 @@
-package br.com.fiap.mypets.security.controllers;
+package br.com.fiap.mypets.controllers;
 
-import br.com.fiap.mypets.security.controllers.model.AuthenticationRequest;
-import br.com.fiap.mypets.security.controllers.model.AuthenticationResponse;
-import br.com.fiap.mypets.security.controllers.model.RegisterRequest;
-import br.com.fiap.mypets.security.services.AuthenticationService;
+import br.com.fiap.mypets.model.AuthenticationRequest;
+import br.com.fiap.mypets.model.AuthenticationResponse;
+import br.com.fiap.mypets.model.RegisterRequest;
+import br.com.fiap.mypets.services.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AuthenticationController {
     private AuthenticationService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity register(@RequestBody RegisterRequest request) throws Exception {
         log.info("Cadastrando nova credencial: [{}]", request);
         return ResponseEntity.ok(service.register(request));
     }

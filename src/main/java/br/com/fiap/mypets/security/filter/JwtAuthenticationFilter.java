@@ -1,7 +1,7 @@
 package br.com.fiap.mypets.security.filter;
 
-import br.com.fiap.mypets.security.repository.TokenRepository;
-import br.com.fiap.mypets.security.services.JwtService;
+import br.com.fiap.mypets.repository.TokenRepository;
+import br.com.fiap.mypets.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

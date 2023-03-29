@@ -1,12 +1,13 @@
-package br.com.fiap.mypets.security.services;
+package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.security.controllers.model.AuthenticationRequest;
-import br.com.fiap.mypets.security.controllers.model.AuthenticationResponse;
-import br.com.fiap.mypets.security.controllers.model.RegisterRequest;
-import br.com.fiap.mypets.security.model.Token;
-import br.com.fiap.mypets.security.model.User;
-import br.com.fiap.mypets.security.repository.TokenRepository;
-import br.com.fiap.mypets.security.repository.UserRepository;
+import br.com.fiap.mypets.exception.BadRequestException;
+import br.com.fiap.mypets.model.AuthenticationRequest;
+import br.com.fiap.mypets.model.AuthenticationResponse;
+import br.com.fiap.mypets.model.RegisterRequest;
+import br.com.fiap.mypets.model.entity.Token;
+import br.com.fiap.mypets.model.entity.User;
+import br.com.fiap.mypets.repository.TokenRepository;
+import br.com.fiap.mypets.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,12 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponse register(RegisterRequest request) throws Exception {
+
+        if(repository.existsByEmail(request.getEmail())){
+         throw new BadRequestException("O Email informado já existe!");
+        }
+
         var user = new User(request.getFirstName(), request.getLastName(), request.getEmail(), passwordEncoder.encode(request.getPassword()));
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);

@@ -1,7 +1,6 @@
 package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.controllers.PetController;
-import br.com.fiap.mypets.entity.PetEntity;
+import br.com.fiap.mypets.model.entity.PetEntity;
 import br.com.fiap.mypets.repository.PetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.security.config;
+package br.com.fiap.mypets.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

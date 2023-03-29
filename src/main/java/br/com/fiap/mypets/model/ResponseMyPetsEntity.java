@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.entity;
+package br.com.fiap.mypets.model;
 
 public class ResponseMyPetsEntity {
     private Object content;

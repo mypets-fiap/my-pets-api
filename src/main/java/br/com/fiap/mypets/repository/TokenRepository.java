@@ -1,6 +1,6 @@
-package br.com.fiap.mypets.security.repository;
+package br.com.fiap.mypets.repository;
 
-import br.com.fiap.mypets.security.model.Token;
+import br.com.fiap.mypets.model.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

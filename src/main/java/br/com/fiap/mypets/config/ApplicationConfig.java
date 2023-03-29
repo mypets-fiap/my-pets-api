@@ -1,6 +1,6 @@
-package br.com.fiap.mypets.security.config;
+package br.com.fiap.mypets.config;
 
-import br.com.fiap.mypets.security.repository.UserRepository;
+import br.com.fiap.mypets.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

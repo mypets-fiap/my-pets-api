@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.security.config;
+package br.com.fiap.mypets.config;
 
 import br.com.fiap.mypets.security.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;

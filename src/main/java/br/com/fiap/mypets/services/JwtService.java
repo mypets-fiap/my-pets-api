@@ -1,7 +1,7 @@
-package br.com.fiap.mypets.security.services;
+package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.security.config.AuthProperties;
-import br.com.fiap.mypets.security.model.User;
+import br.com.fiap.mypets.config.AuthProperties;
+import br.com.fiap.mypets.model.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
