@@ -1,5 +1,6 @@
 package br.com.fiap.mypets.controllers;
 
+import br.com.fiap.mypets.model.PetResponse;
 import br.com.fiap.mypets.model.entity.PetEntity;
 import br.com.fiap.mypets.model.ResponseMyPetsEntity;
 import br.com.fiap.mypets.services.PetService;
@@ -26,7 +27,7 @@ public class PetController {
     @GetMapping("/{id}")
     public ResponseEntity selectPet(@PathVariable String id){
         try {
-            PetEntity pet = service.find(id);
+            PetResponse pet = service.find(id);
             return ResponseEntity.ok(pet);
         }catch (Exception ex){
             LOG.error("Erro inesperado ao consultar um pet", ex);

@@ -1,5 +1,7 @@
 package br.com.fiap.mypets.services;
 
+import br.com.fiap.mypets.model.PetResponse;
+import br.com.fiap.mypets.model.UserResponse;
 import br.com.fiap.mypets.model.entity.PetEntity;
 import br.com.fiap.mypets.model.entity.User;
 import br.com.fiap.mypets.repository.PetRepository;
@@ -40,9 +42,11 @@ public class PetService {
         repository.deleteById(id);
     }
 
-    public PetEntity find(String id){
+    public PetResponse find(String id){
         LOG.info("Buscar pet: " + id);
-        return repository.findById(id).get();
+        PetEntity petEntity = repository.findById(id).get();
+        UserResponse userResponse = new UserResponse(petEntity.getUser());
+        return new PetResponse(petEntity, userResponse);
     }
 
 }
