@@ -35,7 +35,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 , HttpStatus.BAD_REQUEST
         );
     }
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ExceptionDetails> UnauthorizedException(UnauthorizedException bre){
+        List<String> errors = new ArrayList<>();
 
+        errors.add(bre.getMessage());
+
+        return new ResponseEntity<>(
+                new ExceptionDetails(
+                        "Unauthorized",
+                        HttpStatus.UNAUTHORIZED.value(),
+                        LocalDateTime.now(),
+                        errors
+                )
+                , HttpStatus.UNAUTHORIZED
+        );
+    }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
