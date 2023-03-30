@@ -23,7 +23,7 @@ public class PetService {
     @Autowired
     private PetRepository repository;
 
-    public PetEntity save(String email, PetEntity pet){
+    public PetResponse save(String email, PetEntity pet){
 
         User user = userRepository.findByEmail(email).orElseThrow();
         pet.setUser(user);
@@ -34,7 +34,9 @@ public class PetService {
             pet.setId(UUID.randomUUID().toString());
             LOG.info("Salvando pet: "+pet);
         }
-        return repository.save(pet);
+        repository.save(pet);
+        UserResponse userResponse = new UserResponse(pet.getUser());
+        return new PetResponse(pet, userResponse);
     }
 
     public void delete(String id){

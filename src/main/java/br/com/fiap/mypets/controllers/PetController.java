@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/pet")
+@RequestMapping("/api/v1/pet")
 public class PetController {
 
     Logger LOG = LoggerFactory.getLogger(PetController.class);
@@ -28,7 +28,7 @@ public class PetController {
     public ResponseEntity selectPet(@PathVariable String id){
         try {
             PetResponse pet = service.find(id);
-            return ResponseEntity.ok(pet);
+            return ResponseEntity.ok(new ResponseMyPetsEntity(pet));
         }catch (Exception ex){
             LOG.error("Erro inesperado ao consultar um pet", ex);
             return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
@@ -41,9 +41,9 @@ public class PetController {
         try {
             DecodedJWT decodedJWT = JWT.decode(token.substring("Bearer ".length()));
             String email = decodedJWT.getClaim("sub").asString();
-            pet = service.save(email, pet);
-            return ResponseEntity.created(new URI("/pet/"+ pet.getId()))
-                                    .body(new ResponseMyPetsEntity(pet));
+            PetResponse petResponse = service.save(email, pet);
+            return ResponseEntity.created(new URI("/pet/"+ petResponse.getId()))
+                                    .body(new ResponseMyPetsEntity(petResponse));
         }catch (Exception ex){
             LOG.error("Erro inesperado ao cadastrar um pet", ex);
             return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
@@ -59,8 +59,8 @@ public class PetController {
             DecodedJWT decodedJWT = JWT.decode(token.substring("Bearer ".length()));
             String email = decodedJWT.getClaim("sub").asString();
             pet.setId(id);
-            pet = service.save(email, pet);
-            return ResponseEntity.ok(new ResponseMyPetsEntity(pet));
+            PetResponse petResponse = service.save(email, pet);
+            return ResponseEntity.ok(new ResponseMyPetsEntity(petResponse));
         }catch (Exception ex){
             LOG.error("Erro inesperado ao alterar um pet", ex);
             return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));

@@ -9,7 +9,6 @@ import br.com.fiap.mypets.services.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +30,7 @@ public class AuthenticationController {
 
         try {
             log.info("Cadastrando nova credencial: [{}]", request);
-            return ResponseEntity.ok(service.register(request));
+            return ResponseEntity.ok(new ResponseMyPetsEntity(service.register(request)));
         }catch (BadRequestException ex){
             throw ex;
         }
@@ -45,7 +44,7 @@ public class AuthenticationController {
     public ResponseEntity authenticate(@RequestBody AuthenticationRequest request) throws UnauthorizedException {
         try {
             log.info("Efetuando login do usuário [{}]", request);
-            return ResponseEntity.ok(service.authenticate(request));
+            return ResponseEntity.ok(new ResponseMyPetsEntity(service.authenticate(request)));
         }catch (BadCredentialsException ex) {
             throw new UnauthorizedException("Usuário ou senha inválido.");
         }
