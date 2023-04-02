@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.exception;
+package br.com.fiap.mypets.domain.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

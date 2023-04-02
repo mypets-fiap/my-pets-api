@@ -1,7 +1,7 @@
 package br.com.fiap.mypets.controllers;
 
-import br.com.fiap.mypets.exception.BadRequestException;
-import br.com.fiap.mypets.exception.UnauthorizedException;
+import br.com.fiap.mypets.domain.exception.BadRequestException;
+import br.com.fiap.mypets.domain.exception.UnauthorizedException;
 import br.com.fiap.mypets.domain.model.AuthenticationRequest;
 import br.com.fiap.mypets.domain.model.RegisterRequest;
 import br.com.fiap.mypets.domain.model.ResponseMyPetsEntity;

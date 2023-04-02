@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.security.filter;
+package br.com.fiap.mypets.domain.filter;
 
 import br.com.fiap.mypets.repository.TokenRepository;
 import br.com.fiap.mypets.services.JwtService;

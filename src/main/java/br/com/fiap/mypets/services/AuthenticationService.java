@@ -1,6 +1,6 @@
 package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.exception.BadRequestException;
+import br.com.fiap.mypets.domain.exception.BadRequestException;
 import br.com.fiap.mypets.domain.model.AuthenticationRequest;
 import br.com.fiap.mypets.domain.model.AuthenticationResponse;
 import br.com.fiap.mypets.domain.model.RegisterRequest;

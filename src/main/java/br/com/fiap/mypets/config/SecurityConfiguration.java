@@ -1,6 +1,6 @@
 package br.com.fiap.mypets.config;
 
-import br.com.fiap.mypets.security.filter.JwtAuthenticationFilter;
+import br.com.fiap.mypets.domain.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

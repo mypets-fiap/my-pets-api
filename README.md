@@ -6,7 +6,8 @@ Execute o `initialize.sh` para uma execução simples do projeto.
 
 ## Patterns do projeto
 
-Utilizamos o pattern clean architecture para s a nossa aplicaçao 
+Utilizamos o pattern clean architecture para conseguir ter uma arquitetura em camadas simplificada, facil e extensível.
+Dividindo as camadas da aplicaçao por config, controllers, domain, services e repository.
 ![img_1.png](img_1.png)
 
 ## Executando o projeto
