@@ -1,11 +1,11 @@
 package br.com.fiap.mypets.services;
 
 import br.com.fiap.mypets.exception.BadRequestException;
-import br.com.fiap.mypets.model.AuthenticationRequest;
-import br.com.fiap.mypets.model.AuthenticationResponse;
-import br.com.fiap.mypets.model.RegisterRequest;
-import br.com.fiap.mypets.model.entity.Token;
-import br.com.fiap.mypets.model.entity.User;
+import br.com.fiap.mypets.domain.model.AuthenticationRequest;
+import br.com.fiap.mypets.domain.model.AuthenticationResponse;
+import br.com.fiap.mypets.domain.model.RegisterRequest;
+import br.com.fiap.mypets.domain.model.entity.Token;
+import br.com.fiap.mypets.domain.model.entity.User;
 import br.com.fiap.mypets.repository.TokenRepository;
 import br.com.fiap.mypets.repository.UserRepository;
 import org.slf4j.Logger;

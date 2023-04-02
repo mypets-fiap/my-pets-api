@@ -2,9 +2,9 @@ package br.com.fiap.mypets.controllers;
 
 import br.com.fiap.mypets.exception.BadRequestException;
 import br.com.fiap.mypets.exception.UnauthorizedException;
-import br.com.fiap.mypets.model.AuthenticationRequest;
-import br.com.fiap.mypets.model.RegisterRequest;
-import br.com.fiap.mypets.model.ResponseMyPetsEntity;
+import br.com.fiap.mypets.domain.model.AuthenticationRequest;
+import br.com.fiap.mypets.domain.model.RegisterRequest;
+import br.com.fiap.mypets.domain.model.ResponseMyPetsEntity;
 import br.com.fiap.mypets.services.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

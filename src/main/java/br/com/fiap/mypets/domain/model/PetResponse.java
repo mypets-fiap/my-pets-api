@@ -1,6 +1,6 @@
-package br.com.fiap.mypets.model;
+package br.com.fiap.mypets.domain.model;
 
-import br.com.fiap.mypets.model.entity.PetEntity;
+import br.com.fiap.mypets.domain.model.entity.PetEntity;
 
 public class PetResponse {
     private String id;

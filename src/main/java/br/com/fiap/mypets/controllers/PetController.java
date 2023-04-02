@@ -1,8 +1,8 @@
 package br.com.fiap.mypets.controllers;
 
-import br.com.fiap.mypets.model.PetResponse;
-import br.com.fiap.mypets.model.entity.PetEntity;
-import br.com.fiap.mypets.model.ResponseMyPetsEntity;
+import br.com.fiap.mypets.domain.model.PetResponse;
+import br.com.fiap.mypets.domain.model.entity.PetEntity;
+import br.com.fiap.mypets.domain.model.ResponseMyPetsEntity;
 import br.com.fiap.mypets.services.PetService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;

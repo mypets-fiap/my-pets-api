@@ -1,6 +1,6 @@
-package br.com.fiap.mypets.model;
+package br.com.fiap.mypets.domain.model;
 
-import br.com.fiap.mypets.model.entity.User;
+import br.com.fiap.mypets.domain.model.entity.User;
 
 public class UserResponse {
     private Integer id;

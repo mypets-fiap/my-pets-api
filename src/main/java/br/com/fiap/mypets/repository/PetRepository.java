@@ -1,6 +1,6 @@
 package br.com.fiap.mypets.repository;
 
-import br.com.fiap.mypets.model.entity.PetEntity;
+import br.com.fiap.mypets.domain.model.entity.PetEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,5 @@
-package br.com.fiap.mypets.model.entity;
+package br.com.fiap.mypets.domain.model.entity;
 
-import br.com.fiap.mypets.model.entity.PetEntity;
 import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

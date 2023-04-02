@@ -1,9 +1,9 @@
 package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.model.PetResponse;
-import br.com.fiap.mypets.model.UserResponse;
-import br.com.fiap.mypets.model.entity.PetEntity;
-import br.com.fiap.mypets.model.entity.User;
+import br.com.fiap.mypets.domain.model.PetResponse;
+import br.com.fiap.mypets.domain.model.UserResponse;
+import br.com.fiap.mypets.domain.model.entity.PetEntity;
+import br.com.fiap.mypets.domain.model.entity.User;
 import br.com.fiap.mypets.repository.PetRepository;
 import br.com.fiap.mypets.repository.UserRepository;
 import org.slf4j.Logger;

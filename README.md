@@ -4,6 +4,11 @@ API para o Startup One.
 
 Execute o `initialize.sh` para uma execução simples do projeto.
 
+## Patterns do projeto
+
+Utilizamos o pattern clean architecture para s a nossa aplicaçao 
+![img_1.png](img_1.png)
+
 ## Executando o projeto
 
 ### Via script
