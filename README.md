@@ -6,7 +6,7 @@ Execute o `initialize.sh` para uma execução simples do projeto.
 
 ## Patterns do projeto
 
-Utilizamos o pattern clean architecture para conseguir ter uma arquitetura em camadas simplificada, facil e extensível, onde a idéia do código usado nesse padrao deve ser fácil de se manter, reutilizavel e desacoplado. 
+Utilizamos o pattern clean architecture para conseguir ter uma arquitetura em camadas simplificada, facil e extensível, onde a idéia do código usado nesse padrão deve ser fácil de se manter, reutilizável e desacoplado. 
 
 Dividimos as camadas da aplicaçao por config, controllers, domain, services e repository.
 
@@ -28,6 +28,7 @@ Obs: Caso não seja possível executá-lo, favor torná-lo um arquivo executáve
 http://localhost:8080/health
 
 ## Executando os testes
+Implementamos testes unitários nos services para validar se as regras de negócio estão sendo executadas corretamente.
 
     ./run-tests.sh
 
@@ -36,12 +37,12 @@ http://localhost:8080/health
 
 
 ## API endpoints
-Esses endpoints permitem que você cadastre um usuario e seus respectivos pets e controle autenticaçao
+Esses endpoints permitem que você cadastre um usuário e seus respectivos pets e controle autenticação
 
 ### Autenticaçao
     
 #### POST api/v1/auth/authenticate
-Gerar um token valido para conseguir efetuar chamadas para outros endpoints
+Gerar um token valido para conseguir efetuar chamadas para outros endpoints.
 
 **Request**
 
@@ -65,7 +66,7 @@ Gerar um token valido para conseguir efetuar chamadas para outros endpoints
 ___
 
 #### POST api/v1/auth/register
-Cadastrar um novo usuario no sistema
+Cadastrar um novo usuário no sistema
 
 **Request**
 
@@ -93,7 +94,7 @@ ___
 ### Pets
 
 #### GET api/v1/pet/{id}
-Buscar um pet a partir de seu id
+Buscar um pet a partir do id
 
 **Parameters**
 
@@ -195,7 +196,7 @@ Alterar os dados do pet
 ___
 
 #### DELETE api/v1/pet/{id}
-Deletar um pet de seu usuario
+Deletar um pet de seu usuário
 
 |            Name | Required |  Type  | Description                          |
 |----------------:|:--------:|:------:|--------------------------------------|
