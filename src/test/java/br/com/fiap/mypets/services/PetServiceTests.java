@@ -73,5 +73,26 @@ public class PetServiceTests {
         assertEquals(thrown.getMessage(), "No value present");
     }
 
+    @Test
+    public void alterandoPetSucessoTest() {
+        Optional<User> userOptional = Optional.of(new User("nomeTeste", "sobrenomeTeste","teste@teste.com", "senhaTeste"));
+        when(userRepository.findByEmail(anyString())).thenReturn(userOptional);
+        when(petrepository.save(any(PetEntity.class))).thenReturn(null);
+
+        PetEntity pet = new PetEntity();
+        pet.setNome("rodolfo");
+        pet.setRaca("chouchou");
+        pet.setId("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+
+        PetResponse petResponse = petService.save("teste@teste.com", pet);
+
+        assertEquals(petResponse.getId(), "7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+        assertEquals(petResponse.getNome(), "rodolfo");
+        assertEquals(petResponse.getRaca(), "chouchou");
+        assertEquals(petResponse.getUser().getFirstName(), "nomeTeste");
+        assertEquals(petResponse.getUser().getLastName(), "sobrenomeTeste");
+        assertEquals(petResponse.getUser().getEmail(), "teste@teste.com");
+
+    }
 
 }
