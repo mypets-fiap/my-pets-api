@@ -28,12 +28,10 @@ public class PetService {
         User user = userRepository.findByEmail(email).orElseThrow();
         pet.setUser(user);
 
-        if(pet.getId() != null && !pet.getId().isEmpty()){
-            LOG.info("Alterando pet: "+pet);
-        }else{
+        if(pet.getId() == null || pet.getId().isEmpty()){
             pet.setId(UUID.randomUUID().toString());
-            LOG.info("Salvando pet: "+pet);
         }
+
         repository.save(pet);
         UserResponse userResponse = new UserResponse(pet.getUser());
         return new PetResponse(pet, userResponse);
