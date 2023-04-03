@@ -95,4 +95,31 @@ public class PetServiceTests {
 
     }
 
+    @Test
+    public void deletandoPetSucessoTest() {
+        petService.delete("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+    }
+
+    @Test
+    public void buscandoPetSucessoTest() {
+        User user = new User("nomeTeste", "sobrenomeTeste","teste@teste.com", "senhaTeste");
+        user.setId(1);
+        PetEntity pet = new PetEntity();
+        pet.setId("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+        pet.setNome("rodolfo");
+        pet.setRaca("chouchou");
+        pet.setUser(user);
+        Optional<PetEntity> petOptional = Optional.of(pet);
+        when(petrepository.findById(anyString())).thenReturn(petOptional);
+
+        PetResponse petResponse = petService.find("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+
+        assertEquals(petResponse.getId(), "7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+        assertEquals(petResponse.getNome(), "rodolfo");
+        assertEquals(petResponse.getRaca(), "chouchou");
+        assertEquals(petResponse.getUser().getId(), 1);
+        assertEquals(petResponse.getUser().getFirstName(), "nomeTeste");
+        assertEquals(petResponse.getUser().getLastName(), "sobrenomeTeste");
+        assertEquals(petResponse.getUser().getEmail(), "teste@teste.com");
+    }
 }
