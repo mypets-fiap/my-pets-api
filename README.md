@@ -6,11 +6,16 @@ Execute o `initialize.sh` para uma execução simples do projeto.
 
 ## Patterns do projeto
 
+### Clean Architecture
 Utilizamos o pattern clean architecture para conseguir ter uma arquitetura em camadas simplificada, facil e extensível, onde a idéia do código usado nesse padrão deve ser fácil de se manter, reutilizável e desacoplado. 
 
 Dividimos as camadas da aplicaçao por config, controllers, domain, services e repository.
 
 ![img_1.png](img_1.png)
+
+### Dependence Injection
+Utilizamos nas classes a injeção de dependência dissociando o uso de um objeto de sua criação. 
+seguindo o principio de inversão de dependência e responsabilidade única so SOLID. 
 
 ## Executando o projeto
 
