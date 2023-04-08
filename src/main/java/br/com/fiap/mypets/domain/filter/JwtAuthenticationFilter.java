@@ -1,7 +1,7 @@
 package br.com.fiap.mypets.domain.filter;
 
-import br.com.fiap.mypets.repository.TokenRepository;
-import br.com.fiap.mypets.services.JwtService;
+import br.com.fiap.mypets.domain.interfaces.repository.TokenRepository;
+import br.com.fiap.mypets.services.JwtServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtService jwtService;
+    private JwtServiceImpl jwtService;
 
     @Autowired
     private UserDetailsService userDetailsService;

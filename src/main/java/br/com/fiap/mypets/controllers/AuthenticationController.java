@@ -2,10 +2,10 @@ package br.com.fiap.mypets.controllers;
 
 import br.com.fiap.mypets.domain.exception.BadRequestException;
 import br.com.fiap.mypets.domain.exception.UnauthorizedException;
+import br.com.fiap.mypets.domain.interfaces.AuthenticationService;
 import br.com.fiap.mypets.domain.model.AuthenticationRequest;
 import br.com.fiap.mypets.domain.model.RegisterRequest;
 import br.com.fiap.mypets.domain.model.ResponseMyPetsEntity;
-import br.com.fiap.mypets.services.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

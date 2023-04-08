@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.repository;
+package br.com.fiap.mypets.domain.interfaces.repository;
 
 import br.com.fiap.mypets.domain.model.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;

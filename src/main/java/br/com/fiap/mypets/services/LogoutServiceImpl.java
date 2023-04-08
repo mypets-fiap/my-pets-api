@@ -1,6 +1,6 @@
 package br.com.fiap.mypets.services;
 
-import br.com.fiap.mypets.repository.TokenRepository;
+import br.com.fiap.mypets.domain.interfaces.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LogoutService implements LogoutHandler {
+public class LogoutServiceImpl implements LogoutHandler {
 
     @Autowired
     private TokenRepository tokenRepository;

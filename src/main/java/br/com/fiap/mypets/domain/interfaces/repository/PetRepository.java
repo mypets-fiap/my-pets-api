@@ -1,4 +1,4 @@
-package br.com.fiap.mypets.repository;
+package br.com.fiap.mypets.domain.interfaces.repository;
 
 import br.com.fiap.mypets.domain.model.entity.PetEntity;
 import org.springframework.data.repository.CrudRepository;

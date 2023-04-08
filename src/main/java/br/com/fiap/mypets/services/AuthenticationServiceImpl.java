@@ -1,13 +1,15 @@
 package br.com.fiap.mypets.services;
 
 import br.com.fiap.mypets.domain.exception.BadRequestException;
+import br.com.fiap.mypets.domain.interfaces.AuthenticationService;
+import br.com.fiap.mypets.domain.interfaces.JwtService;
 import br.com.fiap.mypets.domain.model.AuthenticationRequest;
 import br.com.fiap.mypets.domain.model.AuthenticationResponse;
 import br.com.fiap.mypets.domain.model.RegisterRequest;
 import br.com.fiap.mypets.domain.model.entity.Token;
 import br.com.fiap.mypets.domain.model.entity.User;
-import br.com.fiap.mypets.repository.TokenRepository;
-import br.com.fiap.mypets.repository.UserRepository;
+import br.com.fiap.mypets.domain.interfaces.repository.TokenRepository;
+import br.com.fiap.mypets.domain.interfaces.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
-    Logger log = LoggerFactory.getLogger(AuthenticationService.class);
+    Logger log = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
 
     @Autowired
     private UserRepository repository;

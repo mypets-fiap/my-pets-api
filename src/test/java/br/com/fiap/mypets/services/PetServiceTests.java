@@ -4,8 +4,8 @@ package br.com.fiap.mypets.services;
 import br.com.fiap.mypets.domain.model.PetResponse;
 import br.com.fiap.mypets.domain.model.entity.PetEntity;
 import br.com.fiap.mypets.domain.model.entity.User;
-import br.com.fiap.mypets.repository.PetRepository;
-import br.com.fiap.mypets.repository.UserRepository;
+import br.com.fiap.mypets.domain.interfaces.repository.PetRepository;
+import br.com.fiap.mypets.domain.interfaces.repository.UserRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class PetServiceTests {
 
     @InjectMocks
-    PetService petService;
+    PetServiceImpl petService;
 
     @Mock
     UserRepository userRepository;

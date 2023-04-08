@@ -1,6 +1,7 @@
 package br.com.fiap.mypets.services;
 
 import br.com.fiap.mypets.config.AuthProperties;
+import br.com.fiap.mypets.domain.interfaces.JwtService;
 import br.com.fiap.mypets.domain.model.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtServiceImpl implements JwtService {
 
     @Autowired
     private AuthProperties properties;
