@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'org.unbroken-dome.test-sets' version '4.0.0'
 }
 
 group = 'br.com.fiap'
@@ -31,6 +32,19 @@ dependencies {
 	implementation 'com.auth0:java-jwt:4.3.0'
 }
 
+testSets {
+	test
+}
+
+tasks.named('check') {
+	dependsOn tasks.named('test')
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+	testLogging {
+		exceptionFormat "full"
+		events "started", "skipped", "passed", "failed"
+		showStandardStreams true
+	}
 }
