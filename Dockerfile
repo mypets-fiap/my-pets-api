@@ -1,4 +1,4 @@
-FROM openjdk:19
+FROM openjdk:17
 EXPOSE 8080
 COPY build/libs/my-pets-1.0.jar /tmp
 WORKDIR /tmp

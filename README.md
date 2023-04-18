@@ -19,6 +19,11 @@ seguindo o principio de inversão de dependência e responsabilidade única so S
 
 ## Executando o projeto
 
+### Pré-Requisitos
+* JDK 17+
+* Docker Desktop
+
+
 ### Via script
 
     ./initialize.sh
