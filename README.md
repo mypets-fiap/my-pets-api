@@ -50,15 +50,17 @@ Implementamos testes unitários nos services para validar se as regras de negóc
 Esses endpoints permitem que você cadastre um usuário e seus respectivos pets e controle autenticação
 
 ### Autenticaçao
-    
-#### POST api/v1/auth/authenticate
-Gerar um token valido para conseguir efetuar chamadas para outros endpoints.
+
+#### POST api/v1/auth/register
+Cadastrar um novo usuário no sistema
 
 **Request**
 
 ```
 {
-    "email":"teste@hotmail.com",
+    "firstName": "Ricardo",
+    "lastName": "Oliveira",
+    "email": "Ricardo@hotmail.com",
     "password": "teste"
 }
 ```
@@ -75,16 +77,14 @@ Gerar um token valido para conseguir efetuar chamadas para outros endpoints.
 ```
 ___
 
-#### POST api/v1/auth/register
-Cadastrar um novo usuário no sistema
+#### POST api/v1/auth/authenticate
+Gerar um token valido para conseguir efetuar chamadas para outros endpoints.
 
 **Request**
 
 ```
 {
-    "firstName": "Ricardo",
-    "lastName": "Oliveira",
-    "email": "Ricardo@hotmail.com",
+    "email":"Ricardo@hotmail.com",
     "password": "teste"
 }
 ```
