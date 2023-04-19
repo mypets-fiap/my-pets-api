@@ -10,6 +10,7 @@ import br.com.fiap.mypets.domain.model.entity.Token;
 import br.com.fiap.mypets.domain.model.entity.User;
 import br.com.fiap.mypets.domain.interfaces.repository.TokenRepository;
 import br.com.fiap.mypets.domain.interfaces.repository.UserRepository;
+import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         saveUserToken(user, jwtToken);
         log.info("Usuário autenticado com sucesso!");
         return new AuthenticationResponse(jwtToken);
+    }
+
+    public User extractUser(String token){
+        Claims claims = jwtService.extractAllClaims(token.split(" ")[1]);
+        return repository.findById(Integer.valueOf(claims.get("userId").toString())).get();
     }
 
     private void saveUserToken(User user, String jwtToken) {

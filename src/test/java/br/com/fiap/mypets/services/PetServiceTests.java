@@ -97,7 +97,7 @@ public class PetServiceTests {
 
     @Test
     public void deletandoPetSucessoTest() {
-        petService.delete("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+        petService.delete("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3", new User());
     }
 
     @Test
@@ -112,7 +112,7 @@ public class PetServiceTests {
         Optional<PetEntity> petOptional = Optional.of(pet);
         when(petrepository.findById(anyString())).thenReturn(petOptional);
 
-        PetResponse petResponse = petService.find("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
+        PetResponse petResponse = petService.find("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3", user);
 
         assertEquals(petResponse.getId(), "7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
         assertEquals(petResponse.getNome(), "rodolfo");
