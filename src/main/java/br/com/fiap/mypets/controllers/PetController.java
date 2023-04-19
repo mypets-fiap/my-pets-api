@@ -4,10 +4,7 @@ import br.com.fiap.mypets.domain.interfaces.AuthenticationService;
 import br.com.fiap.mypets.domain.interfaces.PetService;
 import br.com.fiap.mypets.domain.model.PetResponse;
 import br.com.fiap.mypets.domain.model.entity.PetEntity;
-import br.com.fiap.mypets.domain.model.ResponseMyPetsEntity;
 import br.com.fiap.mypets.domain.model.entity.User;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/pet")
@@ -37,11 +33,11 @@ public class PetController {
             User user = authenticationService.extractUser(authorization);
             PetResponse pet = service.find(id, user);
             if(pet != null)
-                return ResponseEntity.ok(new ResponseMyPetsEntity(pet));
-            return ResponseEntity.ok().build();
+                return ResponseEntity.ok(pet);
+            return ResponseEntity.noContent().build();
         }catch (Exception ex){
-            LOG.error("Erro inesperado ao consultar um pet", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            LOG.error("Ocorreu um erro ao buscar o pet", ex);
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 
@@ -51,15 +47,12 @@ public class PetController {
             User user = authenticationService.extractUser(authorization);
             List<PetResponse> pets = service.findByUser(user);
             if(pets != null && !pets.isEmpty()) {
-                List<ResponseMyPetsEntity> response = pets.stream()
-                        .map(ResponseMyPetsEntity::new)
-                        .collect(Collectors.toList());
-                return ResponseEntity.ok(response);
+                return ResponseEntity.ok(pets);
             }
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }catch (Exception ex){
             LOG.error("Erro inesperado ao consultar todos os pets", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 
@@ -67,12 +60,12 @@ public class PetController {
     public ResponseEntity savePet(@RequestHeader String authorization, @RequestBody PetEntity pet){
         try {
             User user = authenticationService.extractUser(authorization);
-            PetResponse petResponse = service.save(user.getEmail(), pet);
+            PetResponse petResponse = service.save(user, pet);
             return ResponseEntity.created(new URI("/pet/"+ petResponse.getId()))
-                                    .body(new ResponseMyPetsEntity(petResponse));
+                                    .body(petResponse);
         }catch (Exception ex){
             LOG.error("Erro inesperado ao cadastrar um pet", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 
@@ -84,11 +77,11 @@ public class PetController {
         try {
             User user = authenticationService.extractUser(authorization);
             pet.setId(id);
-            PetResponse petResponse = service.save(user.getEmail(), pet);
-            return ResponseEntity.ok(new ResponseMyPetsEntity(petResponse));
+            PetResponse petResponse = service.save(user, pet);
+            return ResponseEntity.ok(petResponse);
         }catch (Exception ex){
             LOG.error("Erro inesperado ao alterar um pet", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
 
     }
@@ -98,10 +91,10 @@ public class PetController {
         try {
             User user = authenticationService.extractUser(authorization);
             service.delete(id, user);
-            return  ResponseEntity.ok(new ResponseMyPetsEntity("Pet excluído com sucesso."));
+            return  ResponseEntity.ok("Pet excluído com sucesso.");
         }catch (Exception ex){
             LOG.error("Erro inesperado ao deletar um pet", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 }

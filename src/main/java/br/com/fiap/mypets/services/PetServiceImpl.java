@@ -26,9 +26,7 @@ public class PetServiceImpl implements PetService {
     @Autowired
     private PetRepository repository;
 
-    public PetResponse save(String email, PetEntity pet){
-
-        User user = userRepository.findByEmail(email).orElseThrow();
+    public PetResponse save(User user, PetEntity pet){
         pet.setUser(user);
 
         if(pet.getId() == null || pet.getId().isEmpty()){
