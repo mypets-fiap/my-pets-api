@@ -29,14 +29,14 @@ public class AuthenticationController {
     public ResponseEntity register(@RequestBody RegisterRequest request) throws Exception {
 
         try {
-            log.info("Cadastrando nova credencial: [{}]", request);
-            return ResponseEntity.ok(new ResponseMyPetsEntity(service.register(request)));
+            log.info("Cadastrando novo usuário: [{}]", request);
+            return ResponseEntity.ok(service.register(request));
         }catch (BadRequestException ex){
             throw ex;
         }
         catch (Exception ex){
-            log.error("Erro inesperado ao registrar um usuario", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            log.error("Erro inesperado ao cadastrar um usuario", ex);
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 
@@ -44,13 +44,13 @@ public class AuthenticationController {
     public ResponseEntity authenticate(@RequestBody AuthenticationRequest request) throws UnauthorizedException {
         try {
             log.info("Efetuando login do usuário [{}]", request);
-            return ResponseEntity.ok(new ResponseMyPetsEntity(service.authenticate(request)));
+            return ResponseEntity.ok(service.authenticate(request));
         }catch (BadCredentialsException ex) {
             throw new UnauthorizedException("Usuário ou senha inválido.");
         }
         catch (Exception ex){
             log.error("Erro inesperado ao autenticar um usuario", ex);
-            return ResponseEntity.internalServerError().body(new ResponseMyPetsEntity(ex.getMessage()));
+            return ResponseEntity.internalServerError().body((ex.getMessage()));
         }
     }
 }

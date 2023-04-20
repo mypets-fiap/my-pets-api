@@ -77,7 +77,8 @@ public class PetController {
         try {
             User user = authenticationService.extractUser(authorization);
             pet.setId(id);
-            PetResponse petResponse = service.save(user, pet);
+            pet.setUser(user);
+            PetResponse petResponse = service.update(user, pet);
             return ResponseEntity.ok(petResponse);
         }catch (Exception ex){
             LOG.error("Erro inesperado ao alterar um pet", ex);

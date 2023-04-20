@@ -1,5 +1,6 @@
 package br.com.fiap.mypets.services;
 
+import br.com.fiap.mypets.domain.exception.BadRequestException;
 import br.com.fiap.mypets.domain.exception.UnauthorizedException;
 import br.com.fiap.mypets.domain.interfaces.PetService;
 import br.com.fiap.mypets.domain.model.PetResponse;
@@ -38,11 +39,8 @@ public class PetServiceImpl implements PetService {
     }
 
     public PetResponse update(User user, PetEntity pet){
-        if(!user.getId().equals(pet.getUser().getId())){
-            throw new UnauthorizedException("Ops, você não possui permissão para alterar este pet!");
-        }
+        PetResponse databasePet = this.find(pet.getId(), user); // verifica se o usuário é dono daquele pet
 
-        pet.setUser(user);
         repository.save(pet);
         UserResponse userResponse = new UserResponse(pet.getUser());
         return new PetResponse(pet, userResponse);
@@ -50,6 +48,9 @@ public class PetServiceImpl implements PetService {
 
     public void delete(String id, User user){
         PetResponse pet = this.find(id, user);
+        if(pet == null){
+            throw new BadRequestException("Não foi encontrado nenhum pet com esse ID");
+        }
         LOG.info("Excluindo petId [{}] do userId [{}]", pet.getId(), user.getId());
         repository.deleteById(pet.getId());
         LOG.info("PetId [{}] excluido com sucesso.", pet.getId());

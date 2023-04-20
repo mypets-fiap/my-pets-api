@@ -6,6 +6,7 @@ import br.com.fiap.mypets.domain.interfaces.JwtService;
 import br.com.fiap.mypets.domain.model.AuthenticationRequest;
 import br.com.fiap.mypets.domain.model.AuthenticationResponse;
 import br.com.fiap.mypets.domain.model.RegisterRequest;
+import br.com.fiap.mypets.domain.model.UserResponse;
 import br.com.fiap.mypets.domain.model.entity.Token;
 import br.com.fiap.mypets.domain.model.entity.User;
 import br.com.fiap.mypets.domain.interfaces.repository.TokenRepository;
@@ -35,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) throws Exception {
+    public UserResponse register(RegisterRequest request) throws Exception {
 
         if(repository.existsByEmail(request.getEmail())){
          throw new BadRequestException("O Email informado já existe!");
@@ -43,10 +44,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         var user = new User(request.getFirstName(), request.getLastName(), request.getEmail(), passwordEncoder.encode(request.getPassword()));
         var savedUser = repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        saveUserToken(savedUser, jwtToken);
-        log.info("Credencial cadastrada com sucesso!");
-        return new AuthenticationResponse(jwtToken);
+        log.info("Usuario cadastrado com sucesso!");
+        return new UserResponse(savedUser);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
