@@ -1,5 +1,6 @@
 package br.com.fiap.mypets.services;
 
+import br.com.fiap.mypets.domain.exception.UnauthorizedException;
 import br.com.fiap.mypets.domain.interfaces.PetService;
 import br.com.fiap.mypets.domain.model.PetResponse;
 import br.com.fiap.mypets.domain.model.UserResponse;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,11 +30,19 @@ public class PetServiceImpl implements PetService {
 
     public PetResponse save(User user, PetEntity pet){
         pet.setUser(user);
+        pet.setId(UUID.randomUUID().toString());
 
-        if(pet.getId() == null || pet.getId().isEmpty()){
-            pet.setId(UUID.randomUUID().toString());
+        repository.save(pet);
+        UserResponse userResponse = new UserResponse(pet.getUser());
+        return new PetResponse(pet, userResponse);
+    }
+
+    public PetResponse update(User user, PetEntity pet){
+        if(!user.getId().equals(pet.getUser().getId())){
+            throw new UnauthorizedException("Ops, você não possui permissão para alterar este pet!");
         }
 
+        pet.setUser(user);
         repository.save(pet);
         UserResponse userResponse = new UserResponse(pet.getUser());
         return new PetResponse(pet, userResponse);
@@ -47,13 +57,18 @@ public class PetServiceImpl implements PetService {
 
     public PetResponse find(String id,  User user){
         LOG.info("Buscando petId [{}] do userId [{}]", id, user.getId());
-        PetEntity petEntity = repository.findById(id).get();
-        if(user.getId().equals(petEntity.getUser().getId())){
-            LOG.info("Pet encontrado do userId [{}]: [{}]", user.getId(), petEntity);
-            UserResponse userResponse = new UserResponse(petEntity.getUser());
-            return new PetResponse(petEntity, userResponse);
+        Optional<PetEntity> petEntity = repository.findById(id);
+        if(petEntity.isPresent()){
+            PetEntity pet = petEntity.get();
+            if(user.getId().equals(pet.getUser().getId())){
+                LOG.info("Pet encontrado do userId [{}]: [{}]", user.getId(), pet);
+                UserResponse userResponse = new UserResponse(pet.getUser());
+                return new PetResponse(pet, userResponse);
+            } else {
+                throw new UnauthorizedException("Ops, você não possui permissão para buscar este pet!");
+            }
         }
-        LOG.info("Pet de ID [{}] encontrado! Porém, não é do usuário informado. Retornando null", id);
+        LOG.info("Nenhum pet encontrado para o id {}", id);
         return null;
     }
 

@@ -9,6 +9,7 @@ import java.util.List;
 public interface PetService {
 
     PetResponse save(User user, PetEntity pet);
+    PetResponse update(User user, PetEntity pet);
     PetResponse find(String id, User user);
 
     List<PetResponse> findByUser(User user);
