@@ -2,8 +2,6 @@
 
 API para o Startup One.
 
-Execute o `initialize.sh` para uma execução simples do projeto.
-
 ## Patterns do projeto
 
 ### Clean Architecture
@@ -21,7 +19,7 @@ seguindo o principio de inversão de dependência e responsabilidade única so S
 
 ### Pré-Requisitos
 * JDK 17+
-* Docker Desktop
+* Docker e Docker Compose
 
 
 ### Via script
@@ -33,23 +31,35 @@ Obs: Caso não seja possível executá-lo, favor torná-lo um arquivo executáve
     $ ./gradlew bootJar
     $ docker-compose build
     $ docker-compose up
+
+### Via IDE (Intellij IDEA, Eclipse, etc)
+
+1. Ajustar as configurações do banco de dados no arquivo [application.yml](src%2Fmain%2Fresources%2Fapplication.yml)
+2. Executar a classe [MyPetsApplication.java](src%2Fmain%2Fjava%2Fbr%2Fcom%2Ffiap%2Fmypets%2FMyPetsApplication.java)
+
 ## Validando a subida
+
+Para validar se tudo foi executado com sucesso, basta acessar está URL:
 
 http://localhost:8080/health
 
 ## Executando os testes
-Implementamos testes unitários nos services para validar se as regras de negócio estão sendo executadas corretamente.
+Implementamos testes unitários no serviço para validar se as regras de negócio estão sendo executadas corretamente.
 
+### Via script
     ./run-tests.sh
+
+### Via terminal (na raíz do projeto)
+    gradlew clean build test
 
 ## Arquitetura
 ![img.png](img.png)
 
 
-## API endpoints
-Esses endpoints permitem que você cadastre um usuário e seus respectivos pets e controle autenticação
+# API endpoints
+Todos os endpoints do projeto se encontram na collection _**automatizada**_ que está em [MyPets API.postman_collection.json](collection_postman%2FMyPets%20API.postman_collection.json)
 
-### Autenticaçao
+### Detalhes dos endpoints
 
 #### POST api/v1/auth/register
 Cadastrar um novo usuário no sistema
@@ -68,11 +78,10 @@ Cadastrar um novo usuário no sistema
 
 ```
 {
-    "content": 
-    {
-        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNrY2hhbmc3QGhvdG1haWwuY29tIiwiZmlyc3ROYW1lIjoiSGVucmlxdWUiLCJsYXN0TmFtZSI6IkNoYW5nIiwiaWF0IjoxNjgwMTM2MzYwLCJleHAiOjE2ODAxMzc4MDB9.wVoH823VfIiuQatEf4iJHLELRYNEVZcOaAltVd6vxk8"
-    },
-    "message": null
+    "id": 1,
+    "firstName": "Ricardo",
+    "lastName": "Oliveira",
+    "email": "Ricardo@hotmail.com"
 }
 ```
 ___
@@ -92,11 +101,7 @@ Gerar um token valido para conseguir efetuar chamadas para outros endpoints.
 
 ```
 {
-    "content": 
-    {
-        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNrY2hhbmc3QGhvdG1haWwuY29tIiwiZmlyc3ROYW1lIjoiSGVucmlxdWUiLCJsYXN0TmFtZSI6IkNoYW5nIiwiaWF0IjoxNjgwMTM2MzYwLCJleHAiOjE2ODAxMzc4MDB9.wVoH823VfIiuQatEf4iJHLELRYNEVZcOaAltVd6vxk8"
-    },
-    "message": null
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNrY2hhbmc3QGhvdG1haWwuY29tIiwiZmlyc3ROYW1lIjoiSGVucmlxdWUiLCJsYXN0TmFtZSI6IkNoYW5nIiwiaWF0IjoxNjgwMTM2MzYwLCJleHAiOjE2ODAxMzc4MDB9.wVoH823VfIiuQatEf4iJHLELRYNEVZcOaAltVd6vxk8"
 }
 ```
 ___
@@ -117,19 +122,15 @@ Buscar um pet a partir do id
 
 ```
 {
-    "content": 
-    {
-        "id": "0de203b6-75cc-47a4-b598-6c235b5357d7",
-        "nome": "luna",
-        "raca": "lulu",
-        "user": {
-            "id": 1,
-            "firstName": "Ricardo",
-            "lastName": "Oliveira",
-            "email": "Ricardo@hotmail.com"
-        }
-    },
-    "message": null
+    "id": "0de203b6-75cc-47a4-b598-6c235b5357d7",
+    "nome": "luna",
+    "raca": "lulu",
+    "user": {
+        "id": 1,
+        "firstName": "Ricardo",
+        "lastName": "Oliveira",
+        "email": "Ricardo@hotmail.com"
+    }
 }
 ```
 ___
@@ -153,18 +154,15 @@ Cadastrar um pet para o usuário
 
 ```
 {
-    "content": {
-        "id": "e9f0cebe-7a51-4a44-9322-a51bac213216",
-        "nome": "luna",
-        "raca": "lulu",
-        "user": {
-            "id": 1,
-            "firstName": "Ricardo",
-            "lastName": "Oliveira",
-            "email": "Ricardo@hotmail.com"
-        }
-    },
-    "message": null
+    "id": "e9f0cebe-7a51-4a44-9322-a51bac213216",
+    "nome": "luna",
+    "raca": "lulu",
+    "user": {
+        "id": 1,
+        "firstName": "Ricardo",
+        "lastName": "Oliveira",
+        "email": "Ricardo@hotmail.com"
+    }
 }
 ```
 ___
@@ -189,18 +187,15 @@ Alterar os dados do pet
 
 ```
 {
-    "content": {
-        "id": "4639dbb8-29a1-4460-9928-fcfb8e9a6269",
-        "nome": "Rodolfo",
-        "raca": "lulu",
-        "user": {
-            "id": 1,
-            "firstName": "Ricardo",
-            "lastName": "Oliveira",
-            "email": "Ricardo@hotmail.com"
-        }
-    },
-    "message": null
+    "id": "4639dbb8-29a1-4460-9928-fcfb8e9a6269",
+    "nome": "Rodolfo",
+    "raca": "lulu",
+    "user": {
+        "id": 1,
+        "firstName": "Ricardo",
+        "lastName": "Oliveira",
+        "email": "Ricardo@hotmail.com"
+    }
 }
 ```
 ___
@@ -216,10 +211,7 @@ Deletar um pet de seu usuário
 **Response**
 
 ```
-{
-    "content": null,
-    "message": "Pet excluído com sucesso."
-}
+ "Pet excluído com sucesso."
 ```
 ___
 
@@ -238,16 +230,8 @@ ___
   "sub": "rickchang7@hotmail.com",
   "firstName": "Henrique",
   "lastName": "Chang",
+  "userId": 1,
   "iat": 1680219942,
   "exp": 1680221382
 }
-```
-
-**VERIFY SIGNATURE**
-```
-HMACSHA256(
-  base64UrlEncode(header) + "." +
-  base64UrlEncode(payload),
-  your-256-bit-secret
-)
 ```
