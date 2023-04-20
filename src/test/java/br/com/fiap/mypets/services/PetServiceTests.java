@@ -117,6 +117,8 @@ public class PetServiceTests {
         pet.setId("7c2e7f05-8a7c-461e-bf97-f676eb57d5a3");
         pet.setUser(dono);
 
+        when(petRepository.findById(pet.getId())).thenReturn(Optional.of(pet));
+
         UnauthorizedException exception = assertThrows(UnauthorizedException.class, () -> {
             PetResponse petResponse = petService.update(user, pet);
         });
